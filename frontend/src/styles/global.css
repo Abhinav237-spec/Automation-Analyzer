@@ -1,0 +1,105 @@
+:root {
+  --bg-base: #080812;
+  --bg-card: #12121f;
+  --bg-elevated: #1a1a2e;
+  --border: #252538;
+  --border-light: #2e2e48;
+  --purple: #6366f1;
+  --purple-light: #818cf8;
+  --purple-dark: #4f46e5;
+  --violet: #8b5cf6;
+  --cyan: #22d3ee;
+  --green: #34d399;
+  --amber: #fbbf24;
+  --red: #f87171;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #475569;
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-base);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-light);
+  border-radius: 3px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.35s ease both;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.markdown-content h3 {
+  color: var(--purple-light);
+  margin: 1rem 0 0.5rem;
+}
+
+.markdown-content p {
+  color: var(--text-secondary);
+  font-size: 0.88em;
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.markdown-content li {
+  color: var(--text-secondary);
+  font-size: 0.88em;
+  margin-bottom: 0.25rem;
+  margin-left: 1.5rem;
+}
+
+.markdown-content strong {
+  color: var(--text-primary);
+}
+
+.markdown-content code {
+  background-color: var(--bg-elevated);
+  color: var(--green);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+}
