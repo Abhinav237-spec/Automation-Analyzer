@@ -4,6 +4,7 @@ import { InputSidebar } from './components/InputSidebar';
 import { DashboardTab } from './components/DashboardTab';
 import { SearchTab, ROITab, RecommendationsTab, NIMTab } from './components/ResultTabs';
 import { Spinner, EmptyState } from './components/UI';
+import { Activity, BrainCircuit, CircleDot, Sparkles } from 'lucide-react';
 
 export default function App() {
   const { loading, data, error, activeTab, setTab, analyze } = useAnalysis();
@@ -11,36 +12,41 @@ export default function App() {
   const tabs = ['Dashboard', 'Semantic Search', 'ROI', 'Recommendations', 'NVIDIA NIM'];
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', backgroundColor: 'var(--bg-base)' }}>
+    <div className="app-shell">
+      <div className="ambient-scene" aria-hidden="true">
+        <div className="orb orb-one" />
+        <div className="orb orb-two" />
+        <div className="signal-core"><i /><i /><i /><span /></div>
+        <div className="floating-cube cube-a"><b /><b /><b /><b /><b /><b /></div>
+        <div className="data-plane" />
+      </div>
       {/* Header */}
-      <header style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 24px', backgroundColor: 'var(--bg-card)', borderBottom: '1px solid var(--border)' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <span style={{ fontSize: '2rem' }}>🧠</span>
+      <header className="app-header">
+        <div className="brand-lockup">
+          <span className="brand-mark"><BrainCircuit size={22} /></span>
           <div>
-            <h1 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--purple-light)', letterSpacing: '0.05em' }}>AUTOPSY AI</h1>
-            <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Process Intelligence Platform v3</p>
+            <h1 className="brand-name">Autopsy AI</h1>
+            <p className="brand-subtitle">Process intelligence workspace</p>
           </div>
         </div>
-        <div style={{ display: 'flex', gap: '8px' }}>
-          {['HF Transformers', 'Sentence Transformers', 'NVIDIA NIM', 'Explainable AI'].map(tag => (
-            <span key={tag} style={{ padding: '4px 8px', backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--border-light)', borderRadius: '4px', fontSize: '0.65rem', color: 'var(--text-muted)', fontWeight: 600 }}>
-              {tag}
-            </span>
-          ))}
+        <div className="header-meta">
+          <span className="system-status"><CircleDot size={13} /> Models ready</span>
+          <span className="header-chip"><Activity size={13} /> Explainable AI</span>
+          <span className="header-chip"><Sparkles size={13} /> NIM enhanced</span>
         </div>
       </header>
 
       {/* Main Layout */}
-      <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
+      <div className="app-workspace">
         {/* Sidebar */}
-        <div style={{ width: '320px', backgroundColor: 'var(--bg-card)', borderRight: '1px solid var(--border)', flexShrink: 0 }}>
+        <div className="input-rail">
           <InputSidebar onAnalyze={analyze} loading={loading} />
         </div>
 
         {/* Content Area */}
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+        <div className="results-workspace">
           {/* Tabs */}
-          <div style={{ display: 'flex', borderBottom: '1px solid var(--border)', padding: '0 24px' }}>
+          <div className="tab-bar" role="tablist" aria-label="Analysis results">
             {tabs.map(tab => {
               const isActive = activeTab === tab;
               const isDisabled = !data;
@@ -50,11 +56,11 @@ export default function App() {
                   onClick={() => !isDisabled && setTab(tab)}
                   disabled={isDisabled}
                   style={{
-                    padding: '16px 20px',
+                    padding: '15px 18px',
                     fontSize: '0.875rem',
                     fontWeight: 600,
                     color: isActive ? 'var(--purple-light)' : 'var(--text-secondary)',
-                    backgroundColor: isActive ? 'var(--bg-elevated)' : 'transparent',
+                    backgroundColor: isActive ? 'rgba(136, 117, 255, 0.09)' : 'transparent',
                     border: 'none',
                     borderBottom: isActive ? '2px solid var(--purple)' : '2px solid transparent',
                     cursor: isDisabled ? 'not-allowed' : 'pointer',
@@ -80,7 +86,7 @@ export default function App() {
           </div>
 
           {/* Scrollable Content */}
-          <div style={{ flex: 1, overflowY: 'auto', padding: '32px 24px', backgroundColor: 'var(--bg-base)' }}>
+          <div className="results-scroll">
             {loading ? (
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', minHeight: '300px', gap: '16px' }}>
                 <Spinner size={40} color="purple-light" />
@@ -109,7 +115,7 @@ export default function App() {
           </div>
 
           {/* Footer */}
-          <footer style={{ padding: '8px 24px', borderTop: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: 'var(--bg-card)' }}>
+          <footer className="app-footer">
             <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
               Powered by Llama 3.1 & all-MiniLM-L6-v2
             </div>
